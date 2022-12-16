@@ -5,7 +5,7 @@ import GlobalStyle from '../../Styles/GlobalStyle';
 const ButtonOutlineSecondary = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
-      <View style={styles.button}>
+      <View style={[styles.button,props.style]}>
         <Text style={styles.buttonText}>{props.title}</Text>
       </View>
     </TouchableOpacity>
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: GlobalStyle.colours.Secondary,
+    fontFamily:GlobalStyle.fonts.Bold,
     fontSize:20,
     alignSelf:'center',
   },

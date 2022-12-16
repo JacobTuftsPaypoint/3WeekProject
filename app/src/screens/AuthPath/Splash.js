@@ -1,23 +1,47 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ButtonFilled from '../../components/Buttons/ButtonFilled';
-import ButtonFilledSecondary from '../../components/Buttons/ButtonFilledSecondary';
-import ButtonOutline from '../../components/Buttons/ButtonOutline';
-import ButtonOutlineSecondary from '../../components/Buttons/ButtonOutlineSecondary';
 import ScreenPrimary from '../../components/Screens/ScreenPrimary';
+import ParaTextSecondary from '../../components/Text/ParaSecondary';
+import TitleText from '../../components/Text/Title';
+import GlobalStyle from '../../Styles/GlobalStyle';
 
-
-const Splash = () =>{
-    console.log("sus")
+const Splash = ({navigation}) =>{
     return(
         <ScreenPrimary>
-            <ButtonFilled onPress={() => console.log('Button pressed')} title="Press me" />
-            <ButtonOutline onPress={() => console.log('Button pressed')} title="Press me" />
-            <ButtonFilledSecondary onPress={() => console.log('Button pressed')} title="Press me" /> 
-            <ButtonOutlineSecondary onPress={() => console.log('Button pressed')} title="Press me" />
+            <TitleText>Odd App</TitleText>
+            <View style={styles.Buttons}>
+                <View style={styles.Holder}>
+                    <ButtonFilled title="Login" onPress={()=>{navigation.navigate("Login")}}/>
+                </View>
+                <View style={styles.Holder}>
+                    <ButtonFilled title="Register" onPress={()=>{navigation.navigate("Register")}}/>
+                </View>
+                <View style={styles.TextHolder}>
+                    <ParaTextSecondary>This app currently serves no purpose and probably never will, we made it anyway though.</ParaTextSecondary>
+                </View>
+                
+            </View>
         </ScreenPrimary>
     )
     
 }
+
+const styles = StyleSheet.create({
+    Buttons:{
+        flex:1,
+        alignContent:"flex-start",
+    },
+    Holder:{
+        height:80,
+        paddingHorizontal:"10%"
+    },
+    TextHolder:{
+        backgroundColor:GlobalStyle.colours.BackgroundSecondary,
+        borderRadius:5,
+        marginHorizontal:"5%",
+        padding:10
+    },
+})
 
 export default Splash

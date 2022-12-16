@@ -4,7 +4,7 @@ import GlobalStyle from '../../Styles/GlobalStyle';
 
 const ScreenPrimary = (props) => {
   return (
-    <View style={styles.Screen}>
+    <View style={[styles.Screen,props.style]}>
       {props.children}
     </View>
   );
