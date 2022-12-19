@@ -1,16 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 
 const ButtonWithNav = (props) => {
     const navigation = useNavigation()
+
     return(
         <View style={{padding: 20}}>
             <Button icon={props.icon} mode='contained' onPress={() => {
-                console.log(props.testMsg);
-                {props.canNavigate ? navigation.navigate(props.route) : console.log("cant naviagte")}
-                }}>
-                {props.text}
+                {props.testMsg !== undefined ? console.log(props.testMsg) : null }
+                {props.route !== undefined ? navigation.navigate(props.route) : console.log("cant naviagte")}
+                }} {...props}
+            >
+                {props.text !== undefined && props.text}
             </Button>
         </View>
     )
