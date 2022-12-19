@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Keyboard } from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import ButtonWithNav from '../../components/ButtonWithNav';
+import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
 
 const Login = ({ navigation }) =>{
 
