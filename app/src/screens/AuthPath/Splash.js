@@ -1,21 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
-import ButtonFilled from '../../components/Buttons/ButtonFilled';
-import ButtonFilledSecondary from '../../components/Buttons/ButtonFilledSecondary';
-import ButtonOutline from '../../components/Buttons/ButtonOutline';
-import ButtonOutlineSecondary from '../../components/Buttons/ButtonOutlineSecondary';
-import ScreenPrimary from '../../components/Screens/ScreenPrimary';
+import ButtonWithNav from '../../components/ButtonWithNav';
 
-
-const Splash = () =>{
+const Splash = ({navigation}) =>{
     console.log("sus")
     return(
-        <ScreenPrimary>
-            <ButtonFilled onPress={() => console.log('Button pressed')} title="Press me" />
-            <ButtonOutline onPress={() => console.log('Button pressed')} title="Press me" />
-            <ButtonFilledSecondary onPress={() => console.log('Button pressed')} title="Press me" /> 
-            <ButtonOutlineSecondary onPress={() => console.log('Button pressed')} title="Press me" />
-        </ScreenPrimary>
+        <View>
+            <ButtonWithNav text='Login' icon='home' testMsg='Button pressed' canNavigate={true} route='Login' />
+        </View>
     )
     
 }
