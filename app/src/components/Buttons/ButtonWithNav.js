@@ -10,7 +10,7 @@ const ButtonWithNav = (props) => {
         <View style={{padding: 20}}>
             <Button icon={props.icon} mode='contained' onPress={() => {
                 {props.testMsg !== undefined ? console.log(props.testMsg) : null }
-                {props.route !== undefined ? navigation.navigate(props.route) : console.log("cant naviagte")}
+                {props.route !== undefined && props.canNavigate == true ? navigation.navigate(props.route) : console.log("cant naviagte")}
                 }} {...props}
             >
                 {props.text !== undefined && props.text}

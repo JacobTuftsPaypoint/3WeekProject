@@ -39,10 +39,10 @@ const Login = () =>{
 
         <View style={{flexDirection: 'row'}}>
             <View style={styles.buttonBox}>
-                <ButtonWithNav text='Register' icon='account' testMsg='Register' route='Register'/>
+                <ButtonWithNav text='Register' icon='account' canNavigate={true} testMsg='Register' route='Register'/>
             </View>
             <View style={styles.buttonBox}>
-                <ButtonWithNav text='Forgot' icon='lock-reset' testMsg='Forgot' route='Forgot'/>
+                <ButtonWithNav text='Forgot' icon='lock-reset' canNavigate={true} testMsg='Forgot' route='Forgot'/>
             </View>
         </View>
     </View>
