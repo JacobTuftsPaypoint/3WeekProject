@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';

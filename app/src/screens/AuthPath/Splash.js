@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
 
 const Splash = ({navigation}) =>{
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
         paddingHorizontal:"10%"
     },
     TextHolder:{
-        backgroundColor:GlobalStyle.colours.BackgroundSecondary,
         borderRadius:5,
         marginHorizontal:"5%",
         padding:10

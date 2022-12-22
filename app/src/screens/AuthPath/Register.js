@@ -1,6 +1,6 @@
-
-import React, {useState} from 'react';
-import { View, ScrollView } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
 
@@ -17,6 +17,7 @@ const Register = () =>{
     const [emailErrMsg, setEmailErrMsg] = useState('')
 
     //Confirm Email Stuff
+    const [email2, setEmail2] = useState('')
     const [emailErr2, setEmailErr2] = useState(false)
     const [emailErrMsg2, setEmailErrMsg2] = useState('')
 
@@ -26,6 +27,7 @@ const Register = () =>{
     const [passwordErrMsg, setPasswordErrMsg] = useState('')
 
     //confirm Password stuff
+    const [password2, setPassword2] = useState('')
     const [passwordErr2, setPasswordErr2] = useState(false)
     const [passwordErrMsg2, setPasswordErrMsg2] = useState('')
 
@@ -33,38 +35,69 @@ const Register = () =>{
     const [showPass, setShowPass] = useState(true)
     const [showPass2, setShowPass2] = useState(true)
 
+    const [error1, setError1] = useState(true)
+
     //To control whether we can move on to the next page
     const [canNavigate, setCanNavigate] = useState(false)
 
-    const [val1, setVal1] = useState('')
+    function ValidateForm(Username, Email1, Email2, Password1, Password2) {
 
-    function ValidateForm(name, email, password) {
-        if(name.length == 0) {
-            setNameErrMsg('Please Enter Your Name')
+        if(Username.length === 0 ) {
             setNameErr(true)
-        } 
-
-        if (email.length == 0) {
-            setEmailErrMsg('Please Enter Your Email')
-            setEmailErr(true)
-        }
-
-        if(!email.includes("@")){
-            setEmailErrMsg('Please Enter a Valid Email')
-            setEmailErr(true)
-        }
-
-
-        if (password.length == 0) {
-            setPasswordErrMsg('Please Enter Your Password')
-            setPasswordErr(true)
-
-        }
-
-        if(nameErr == false && passwordErr == false && passwordErr2 == false && emailErr == false && emailErr2 == false) {
-            setCanNavigate(true)
+            setNameErrMsg('Please enter your name')
         } else {
-            setCanNavigate(false)
+            setNameErr(false)
+        }
+
+        if(Email1.length === 0) {
+            setEmailErr(true)
+            setEmailErrMsg('Enter Email')
+            console.log(1)
+        } else {   
+            setEmailErr(false)
+        }
+
+        if(!Email1.includes("@")) {
+            setEmailErr(true)
+            setEmailErrMsg('Enter Valid Email')
+            console.log(1)   
+        } else {  
+            setEmailErr(false)
+        }
+
+        if(Email2.length === 0) {
+            setEmailErr2(true)
+            setEmailErrMsg2('Enter Email')
+            console.log(1) 
+        } else {  
+            setEmailErr2(false)
+        }
+
+        if(Password1.length < 6) {
+            setPasswordErr(true)
+            setPasswordErrMsg('Your Password should be at least 6 characters') 
+        } else {
+            
+        }
+
+        if(Password2.length < 6) {
+            setPasswordErr2(true)
+            setPasswordErrMsg2('Your Password should be at least 6 characters')  
+        } else {
+            
+        }
+
+        if(Password2 !== Password1) {
+            setPasswordErr2(true)
+            setPasswordErrMsg2('Password should match')  
+        } else {
+            
+        }
+
+        if ((Username.length === 0) || (Email1.length === 0) || (Email2.length === 0) || (Password1.length === 0) || (Password2.length === 0)) {
+            return false
+        } else {
+            return true
         }
 
     }
@@ -108,7 +141,7 @@ const Register = () =>{
                     mode='outlined' 
                     error={emailErr2} 
                     onEndEditing={text => 
-                        {text.nativeEvent.text == email ? setEmailErr2(false) : setEmailErr2(true),setEmailErrMsg2('Please Make Sure That Your Emails Match') , setCanNavigate(false)}
+                        {text.nativeEvent.text == email ? (setEmailErr2(false), setEmail2(text.nativeEvent.text)) : setEmailErr2(true),setEmailErrMsg2('Please Make Sure That Your Emails Match') , setCanNavigate(false)}
                     } 
                 />
                 {emailErr2 ? (<HelperText type='error' visible={emailErr2}>{emailErrMsg2}</HelperText>) : (null)}
@@ -141,7 +174,7 @@ const Register = () =>{
                     secureTextEntry={showPass2} 
                     error={passwordErr2} 
                     onEndEditing={(text) => 
-                        {text.nativeEvent.text == password ? setPasswordErr2(false) : setPasswordErr2(true),setPasswordErrMsg2('Please Make Sure That Your Passwords Match'), setCanNavigate(false)}
+                        {text.nativeEvent.text == password ? (setPasswordErr2(false), setPassword2(text.nativeEvent.text)) : setPasswordErr2(true),setPasswordErrMsg2('Please Make Sure That Your Passwords Match'), setCanNavigate(false)}
                     } 
                     right={<TextInput.Icon  icon={!showPass2 ? 'eye' : 'eye-off'} onPress={() => {
                         {showPass2 == false ? setShowPass2(true) : setShowPass2(false)}
@@ -152,9 +185,10 @@ const Register = () =>{
 
             </View>
             <View>
-                <ButtonWithNav text='submit' icon='check' canNavigate={canNavigate} route='Splash' textMsg='submit' onPressIn={() => {
-                    ValidateForm(name, email, password)
-                    console.log(nameErr, emailErr, emailErr2, passwordErr, passwordErr2)
+                <ButtonWithNav text='submit' icon='check' canNavigate={canNavigate} route='Splash' textMsg='submit'  onPressIn={() => {
+
+                    {ValidateForm(name, email, email2, password, password2) ? setCanNavigate(true) : setCanNavigate(false)}
+
                 }} />
             </View>
         </ScrollView>

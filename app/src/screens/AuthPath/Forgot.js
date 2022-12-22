@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import TopBar from '../../components/AppBars/TopBar';
 import { HelperText, Text, TextInput } from 'react-native-paper';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
@@ -74,4 +73,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Login
+export default Forgot
