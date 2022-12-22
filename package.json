@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "babel-plugin-transform-modern-regexp": "^0.0.6"
+  }
+}
