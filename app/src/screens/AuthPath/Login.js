@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Keyboard } from 'react-native';
-import { Button, TextInput} from 'react-native-paper';
-import TopBar from '../../components/AppBars/TopBar';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
+import PasswordField from '../../components/InputFields/PasswordField';
 
 const Login = () =>{
 
@@ -17,17 +17,18 @@ const Login = () =>{
 
 
     return(
-    <View>
-
-        {/* <TopBar title='Login' /> */}
+    <ScrollView>
 
         <View style={{paddingHorizontal: 20}}>
             <TextInput textContentType='name' maxLength={40} style={styles.textBox} label='Name' mode='outlined' error={nameErr} onChangeText={text => {setName(text)}} />
 
             <TextInput maxLength={40} textContentType='email' style={styles.textBox} label='Email' mode='outlined' error={emailErr} onChangeText={text => {setEmail(text)}} />
+{/* 
+            <TextInput maxLength={15} textContentType='password' style={styles.textBox} label='Password' mode='outlined' error={passwordErr} secureTextEntry={true} onChangeText={text => setPassword(text)} /> */}
 
-            <TextInput maxLength={15} textContentType='password' style={styles.textBox} label='Password' mode='outlined' error={passwordErr} secureTextEntry={true} onChangeText={text => setPassword(text)} />
+            <PasswordField confirmation={true} />
         </View>
+
 
         <View>
             <ButtonWithNav text='Submit' icon='check' testMsg='Submit' onPressIn={ () => {
@@ -45,7 +46,7 @@ const Login = () =>{
                 <ButtonWithNav text='Forgot' icon='lock-reset' canNavigate={true} testMsg='Forgot' route='Forgot'/>
             </View>
         </View>
-    </View>
+    </ScrollView>
     )
 }
 

@@ -7,7 +7,7 @@ const Splash = ({navigation}) =>{
     return(
         <View>
             <ButtonWithNav text='Login' icon='login' testMsg='Button pressed' canNavigate={true} route='Login' />
-            <ButtonWithNav text='Register' icon='account-plus-outline' testMsg='Button pressed' canNavigate={true} route='Login' style={{marginTop: -20}} />
+            <ButtonWithNav text='Register' icon='account-plus-outline' testMsg='Button pressed' canNavigate={true} route='Register' style={{marginTop: -20}} />
         </View>
     )
     
