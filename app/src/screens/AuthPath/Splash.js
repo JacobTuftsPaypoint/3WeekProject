@@ -1,28 +1,14 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import ButtonFilled from '../../components/Buttons/ButtonFilled';
-import ScreenPrimary from '../../components/Screens/ScreenPrimary';
-import ParaTextSecondary from '../../components/Text/ParaSecondary';
-import TitleText from '../../components/Text/Title';
-import GlobalStyle from '../../Styles/GlobalStyle';
+import { View } from 'react-native';
+import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
 
 const Splash = ({navigation}) =>{
+    console.log("sus")
     return(
-        <ScreenPrimary>
-            <TitleText>Odd App</TitleText>
-            <View style={styles.Buttons}>
-                <View style={styles.Holder}>
-                    <ButtonFilled title="Login" onPress={()=>{navigation.navigate("Login")}}/>
-                </View>
-                <View style={styles.Holder}>
-                    <ButtonFilled title="Register" onPress={()=>{navigation.navigate("Register")}}/>
-                </View>
-                <View style={styles.TextHolder}>
-                    <ParaTextSecondary>This app currently serves no purpose and probably never will, we made it anyway though.</ParaTextSecondary>
-                </View>
-                
-            </View>
-        </ScreenPrimary>
+        <View>
+            <ButtonWithNav text='Login' icon='login' testMsg='Button pressed' canNavigate={true} route='Login' />
+            <ButtonWithNav text='Register' icon='account-plus-outline' testMsg='Button pressed' canNavigate={true} route='Register' style={{marginTop: -20}} />
+        </View>
     )
     
 }

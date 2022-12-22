@@ -1,50 +1,63 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import ButtonFilled from '../../components/Buttons/ButtonFilled';
-import Input from '../../components/Inputs/TextInput';
-import Error from '../../components/Popups/Error';
-import ScreenPrimary from '../../components/Screens/ScreenPrimary';
-import TitleText from '../../components/Text/Title';
-import HandleLogin from '../../logic/HandleLogin';
 
-const Login = ({navigation}) =>{
-    const [UsernameValue, SetUsernameValue] = useState('');
-    const [PasswordValue, SetPasswordValue] = useState('');
-    const [ErrorValue, SetErrorValue] = useState('');
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
+
+const Login = () =>{
+
+    const [name, setName] = useState('')
+    const [nameErr, setNameErr] = useState(false)
+
+    const [email, setEmail] = useState('')
+    const [emailErr, setEmailErr] = useState(false)
+
+    const [password, setPassword] = useState('')
+    const [passwordErr, setPasswordErr] = useState(false)
+
 
     return(
-        <ScreenPrimary>
-            <TitleText style={styles.Title}>Login</TitleText>
-            <Input style={styles.Input} placeholder="Username/Email" onChangeText={(text)=>{SetUsernameValue(text)}}/>
-            <Input style={styles.Input} placeholder="Password" onChangeText={(text)=>{SetPasswordValue(text)}}/>
-            <Error state={ErrorValue}/>
-            <View style={styles.ButtonHolder}>
-                <ButtonFilled style={styles.Button} title="Login" onPress={()=>{
-                    HandleLogin(UsernameValue,PasswordValue,SetErrorValue)
-                }}/>
-                <ButtonFilled style={styles.Button} title="Forgot Password" onPress={()=>{navigation.navigate("Forgot")}}/>
+    <ScrollView>
+
+        <View style={{paddingHorizontal: 20}}>
+            <TextInput textContentType='name' maxLength={40} style={styles.textBox} label='Name' mode='outlined' error={nameErr} onChangeText={text => {setName(text)}} />
+
+            <TextInput maxLength={40} textContentType='email' style={styles.textBox} label='Email' mode='outlined' error={emailErr} onChangeText={text => {setEmail(text)}} />
+
+            <TextInput maxLength={15} textContentType='password' style={styles.textBox} label='Password' mode='outlined' error={passwordErr} secureTextEntry={true} onChangeText={text => setPassword(text)} />
+
+        </View>
+
+
+        <View>
+            <ButtonWithNav text='Submit' icon='check' testMsg='Submit' onPressIn={ () => {
+                {name.length > 0 ? (setNameErr(false)) : (setNameErr(true))}
+                {email.length > 0 ? setEmailErr(false) : setEmailErr(true)}
+                {password.length > 0 ? setPasswordErr(false) : setPasswordErr(true)}
+            }} />
+        </View>
+
+        <View style={{flexDirection: 'row'}}>
+            <View style={styles.buttonBox}>
+                <ButtonWithNav text='Register' icon='account' canNavigate={true} testMsg='Register' route='Register'/>
             </View>
-        </ScreenPrimary>
+            <View style={styles.buttonBox}>
+                <ButtonWithNav text='Forgot' icon='lock-reset' canNavigate={true} testMsg='Forgot' route='Forgot'/>
+            </View>
+        </View>
+    </ScrollView>
     )
-    
 }
 
 const styles = StyleSheet.create({
-    Title:{
-        fontSize:60,
-        marginBottom:40
+    container: {
+        padding: 10,
     },
-    Input:{
-        marginHorizontal:"5%",
-        marginVertical:10
+    textBox: {
+        marginVertical: 5
     },
-    Button:{
-        marginHorizontal:"10%",
-        marginVertical: 5,
-        padding:20
-    },
-    ButtonHolder:{
-        marginTop:40
+    buttonBox: {
+        flexGrow: 1
     }
 })
 

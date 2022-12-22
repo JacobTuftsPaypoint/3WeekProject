@@ -1,36 +1,52 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import ButtonFilled from '../../components/Buttons/ButtonFilled';
-import Input from '../../components/Inputs/TextInput';
-import Error from '../../components/Popups/Error';
-import ScreenPrimary from '../../components/Screens/ScreenPrimary';
-import ScreenSecondary from '../../components/Screens/ScreenSecondary';
-import ParaTextSecondary from '../../components/Text/ParaSecondary';
-import TitleText from '../../components/Text/Title';
-import HandleForget from '../../logic/HandleForget';
+
+import { View } from 'react-native';
+import TopBar from '../../components/AppBars/TopBar';
+import { HelperText, Text, TextInput } from 'react-native-paper';
+import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
 
 
+const Forgot = () =>{
 
-const Login = ({navigation}) =>{
-    const [UsernameValue, SetUsernameValue] = useState('');
-    const [ErrorValue, SetErrorValue] = useState('');
+    const [email, setEmail] = useState('')
+    const [emailErr, setEmailErr] = useState(false)
+
+    const [inputErr, setInputErr] = useState(false)
+    const [errorText, setErrorText] = useState('')
+    const [canNavigate, setCanNavigate] = useState(false)
+
+    function ValidateInput(input) {
+        if(!input.includes('@')) {
+            setErrorText('Please Enter a Valid Email Address')
+            setInputErr(true)
+            setCanNavigate(false)
+        } else {
+            setCanNavigate(true)
+        }
+    }
 
     return(
-        <ScreenPrimary>
-            <TitleText style={styles.Title}>Forgot    Password</TitleText>
-            <ScreenSecondary style={styles.Desc}>
-                <ParaTextSecondary>If you can't remember the password to your ODD account enter the email or username associated with the account below and a recovery email will be sent to you</ParaTextSecondary>
-            </ScreenSecondary>
-            <Input style={styles.Input} placeholder="Username/Email" onChangeText={(text)=>{SetUsernameValue(text)}}/>
-            <Error state={ErrorValue}/>
-            <View style={styles.ButtonHolder}>
-                <ButtonFilled style={styles.Button} title="Recover" onPress={()=>{
-                    HandleForget(UsernameValue,SetErrorValue)
-                }}/>
+        <View>
+            <View style={{paddingHorizontal: 20, paddingTop: 20}}>
+                <Text variant='bodyLarge'>Please Enter the Email Associated With Your Account</Text>
+                <TextInput 
+                    maxLength={40} 
+                    textContentType='email' 
+                    style={{marginVertical: 5}} 
+                    label='Email' 
+                    mode='outlined' 
+                    error={emailErr} 
+                    onChangeText={(text) => {
+                        setEmail(text)
+                        setInputErr(false)
+                    }} />
+                <HelperText type='error' visible={inputErr} >{errorText}</HelperText>
             </View>
-        </ScreenPrimary>
+            <ButtonWithNav text='submit' icon='check' textMsg='submit' canNavigate={canNavigate} route='Verify' onPressIn={() => {
+                ValidateInput(email)
+            }} />
+        </View>
     )
-    
 }
 
 const styles = StyleSheet.create({
