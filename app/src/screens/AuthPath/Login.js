@@ -23,10 +23,12 @@ const Login = () =>{
             <TextInput textContentType='name' maxLength={40} style={styles.textBox} label='Name' mode='outlined' error={nameErr} onChangeText={text => {setName(text)}} />
 
             <TextInput maxLength={40} textContentType='email' style={styles.textBox} label='Email' mode='outlined' error={emailErr} onChangeText={text => {setEmail(text)}} />
-{/* 
-            <TextInput maxLength={15} textContentType='password' style={styles.textBox} label='Password' mode='outlined' error={passwordErr} secureTextEntry={true} onChangeText={text => setPassword(text)} /> */}
 
+            <TextInput maxLength={15} textContentType='password' style={styles.textBox} label='Password' mode='outlined' error={passwordErr} secureTextEntry={true} onChangeText={text => setPassword(text)} />
+
+            {/* Testing purposes only */}
             <PasswordField confirmation={true} />
+            {/* Testing purposes only */}
         </View>
 
 

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { View, ScrollView } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
-import TopBar from '../../components/AppBars/TopBar';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
 
 const Register = () =>{
@@ -36,6 +35,8 @@ const Register = () =>{
     //To control whether we can move on to the next page
     const [canNavigate, setCanNavigate] = useState(false)
 
+    const [val1, setVal1] = useState('')
+
     function ValidateForm(name, email, password) {
         if(name.length == 0) {
             setNameErrMsg('Please Enter Your Name')
@@ -59,10 +60,10 @@ const Register = () =>{
 
         }
 
-        if(nameErr == false || passwordErr == false || passwordErr2 == false || emailErr == false || emailErr2 == false) {
-            setCanNavigate(false)
-        } else {
+        if(nameErr == false && passwordErr == false && passwordErr2 == false && emailErr == false && emailErr2 == false) {
             setCanNavigate(true)
+        } else {
+            setCanNavigate(false)
         }
 
     }
@@ -83,7 +84,7 @@ const Register = () =>{
                         {setName(text); setNameErr(false)}
                     } 
                 />
-                <HelperText type='error' visible={nameErr}>{nameErrMsg}</HelperText>
+                { nameErr ? (<HelperText type='error' visible={nameErr}>{nameErrMsg}</HelperText>) : (null)}
 
                 <TextInput 
                     label='Email'
@@ -96,7 +97,7 @@ const Register = () =>{
                         {setEmail(text); setEmailErr(false)}
                     } 
                 />
-                <HelperText type='error' visible={emailErr}>{emailErrMsg}</HelperText>
+                {emailErr ? (<HelperText type='error' visible={emailErr}>{emailErrMsg}</HelperText>) : (null)}
 
                 <TextInput 
                     label='Confirm Email'
@@ -105,11 +106,12 @@ const Register = () =>{
                     style={{marginVertical: 5}} 
                     mode='outlined' 
                     error={emailErr2} 
-                    onChangeText={text => 
-                        {text == email ? setEmailErr2(false) : setEmailErr2(true),setEmailErrMsg2('Please Make Sure That Your Emails Match') , setCanNavigate(false)}
+                    onEndEditing={text => 
+                        {text.nativeEvent.text == email ? setEmailErr2(false) : setEmailErr2(true),setEmailErrMsg2('Please Make Sure That Your Emails Match') , setCanNavigate(false)}
                     } 
                 />
-                <HelperText type='error' visible={emailErr2}>{emailErrMsg2}</HelperText>
+                {emailErr2 ? (<HelperText type='error' visible={emailErr2}>{emailErrMsg2}</HelperText>) : (null)}
+
 
                 <TextInput 
                     label='Password'
@@ -126,7 +128,8 @@ const Register = () =>{
                         {showPass == false ? setShowPass(true) : setShowPass(false)}
                     } }/>}
                 />
-                <HelperText type='error' visible={passwordErr}>{passwordErrMsg}</HelperText>
+                {passwordErr ? (<HelperText type='error' visible={passwordErr}>{passwordErrMsg}</HelperText>) : (null)}
+
 
                 <TextInput 
                     label='Confirm Password'
@@ -136,19 +139,21 @@ const Register = () =>{
                     mode='outlined' 
                     secureTextEntry={showPass2} 
                     error={passwordErr2} 
-                    onChangeText={text => 
-                        {text == password ? setPasswordErr2(false) : setPasswordErr2(true),setPasswordErrMsg2('Please Make Sure That Your Passwords Match'), setCanNavigate(false)}
+                    onEndEditing={(text) => 
+                        {text.nativeEvent.text == password ? setPasswordErr2(false) : setPasswordErr2(true),setPasswordErrMsg2('Please Make Sure That Your Passwords Match'), setCanNavigate(false)}
                     } 
                     right={<TextInput.Icon  icon={!showPass2 ? 'eye' : 'eye-off'} onPress={() => {
                         {showPass2 == false ? setShowPass2(true) : setShowPass2(false)}
                     } }/>}
                 />
-                <HelperText type='error' visible={passwordErr2}>{passwordErrMsg2}</HelperText>
+                {passwordErr2 ? (<HelperText type='error' visible={passwordErr2}>{passwordErrMsg2}</HelperText>) : (null)}
+
 
             </View>
             <View>
                 <ButtonWithNav text='submit' icon='check' canNavigate={canNavigate} route='Splash' textMsg='submit' onPressIn={() => {
                     ValidateForm(name, email, password)
+                    console.log(nameErr, emailErr, emailErr2, passwordErr, passwordErr2)
                 }} />
             </View>
         </ScrollView>
