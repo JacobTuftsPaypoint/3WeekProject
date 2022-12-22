@@ -13,4 +13,21 @@ const Splash = ({navigation}) =>{
     
 }
 
+const styles = StyleSheet.create({
+    Buttons:{
+        flex:1,
+        alignContent:"flex-start",
+    },
+    Holder:{
+        height:80,
+        paddingHorizontal:"10%"
+    },
+    TextHolder:{
+        backgroundColor:GlobalStyle.colours.BackgroundSecondary,
+        borderRadius:5,
+        marginHorizontal:"5%",
+        padding:10
+    },
+})
+
 export default Splash

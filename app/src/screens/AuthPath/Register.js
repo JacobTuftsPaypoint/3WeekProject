@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import { View, ScrollView } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
@@ -158,6 +159,26 @@ const Register = () =>{
             </View>
         </ScrollView>
     )
+
 }
+
+const styles = StyleSheet.create({
+    Title:{
+        fontSize:60,
+        marginBottom:40
+    },
+    Input:{
+        marginHorizontal:"5%",
+        marginVertical:10
+    },
+    Button:{
+        marginHorizontal:"10%",
+        marginVertical: 5,
+        padding:20
+    },
+    ButtonHolder:{
+        marginTop:40
+    }
+})
 
 export default Register

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { View } from 'react-native';
 import TopBar from '../../components/AppBars/TopBar';
 import { HelperText, Text, TextInput } from 'react-native-paper';
@@ -48,4 +49,29 @@ const Forgot = () =>{
     )
 }
 
-export default Forgot
+const styles = StyleSheet.create({
+    Title:{
+        fontSize:50,
+        marginBottom:40
+    },
+    Input:{
+        marginHorizontal:"5%",
+        marginVertical:10
+    },
+    Button:{
+        marginHorizontal:"10%",
+        marginVertical: 5,
+        padding:20
+    },
+    ButtonHolder:{
+        marginTop:40
+    },
+    Desc:{
+        margin:"5%",
+        borderRadius:5,
+        padding:5,
+        flex:0
+    }
+})
+
+export default Login

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import GlobalStyle from '../../Styles/GlobalStyle';
 
-const ButtonFilledSecondary = (props) => {
+const ButtonFilledNegative = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <View style={[styles.button,props.style]}>
@@ -14,7 +14,7 @@ const ButtonFilledSecondary = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: GlobalStyle.colours.Secondary,
+    backgroundColor: GlobalStyle.colours.Negative,
     padding: 5,
     borderRadius:5,
   },
@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ButtonFilledSecondary;
+export default ButtonFilledNegative;
 
-// <ButtonFilledSecondary onPress={() => console.log('Button pressed')} title="Press me" />
+// <ButtonFilledNegative onPress={() => console.log('Button pressed')} title="Press me" />
