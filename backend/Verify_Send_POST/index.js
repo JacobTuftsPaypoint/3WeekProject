@@ -81,29 +81,31 @@ module.exports = function (context, req) {
                     }
                     //Defines what happens when data is returned by the CheckRequest request
                     CheckRequest.on("row",(columns)=>{
-                        console.log(columns[5])
-                        if (columns[5]==false) {
+                        console.log(columns[5].value)
+                        if (columns[5].value==false) {
                             const token = crypto.randomUUID()
                             bcrypt.hash(token,8,(err,result)=>{
                                 if (err) {
                                     context.res={status:500,body:"Hash error, server could not hash token"}
                                     context.done() 
                                 } else {
-                                    EmailContainer.items.query(emailquery).fetchAll.then((response)=>{
+                                    EmailContainer.items.query(emailquery).fetchAll().then((response)=>{
+                                        console.log(response)
                                         if (response.resources.length>0) {
+                                            console.log(response.resources[0].id)
                                             EmailContainer.item(response.resources[0].id,response.resources[0].id).delete()
                                             console.log("Email token deleted")
                                         }
                                     })
-                                    EmailContainer.items.create({UserID:columns[0],Username:columns[1],Token:result}).then((value)=>{
+                                    EmailContainer.items.create({UserID:columns[0].value,Username:columns[1].value,Token:result}).then((value)=>{
                                         if (value) {
                                             var client = new postmark.ServerClient(process.env["PostmarkString"]);
                                             client.sendEmail({
-                                                "From": "jacobtufts@paypoint.com",
-                                                "To": "jacobtufts@paypoint.com",
-                                                "Subject": "Hello from Postmark",
-                                                "HtmlBody": "<strong>Hello</strong> dear Postmark user.",
-                                                "TextBody": "Hello from Postmark!",
+                                                "From": "hello@oddmedialtd.com",
+                                                "To": "hello@oddmedialtd.com",
+                                                "Subject": "Verify Your Email",
+                                                "HtmlBody": `<b>Hi there!,</b><br><p>Before you can use our services you must verify that you gave us the correct information, this is important as it allows you to recover your account or receive important information from us.</p><br><br><br><br><a href="https://auth.oddmedialtd.com?username=${HTTPPayload.Username}&token=${token}">Click Here!</a>`,
+                                                "TextBody": `To use our services you must verify the email connected to your accounts, this can be done at the following page: https://auth.oddmedialtd.com?username=${HTTPPayload.Username}&token=${token}`,
                                                 "MessageStream": "outbound"
                                             });
                                             context.res={status:200,body:"Email Sent"}
