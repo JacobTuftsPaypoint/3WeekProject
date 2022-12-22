@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
-import PasswordField from '../../components/InputFields/PasswordField';
 
 const Login = () =>{
 
@@ -26,9 +25,6 @@ const Login = () =>{
 
             <TextInput maxLength={15} textContentType='password' style={styles.textBox} label='Password' mode='outlined' error={passwordErr} secureTextEntry={true} onChangeText={text => setPassword(text)} />
 
-            {/* Testing purposes only */}
-            <PasswordField confirmation={true} />
-            {/* Testing purposes only */}
         </View>
 
 
