@@ -12,27 +12,35 @@ import TopBar from './components/AppBars/TopBar';
 const Stack = createNativeStackNavigator()
 
 const App = () =>{
-  
   return(
     <NavigationContainer>
-      {true == true ? ( 
-        <Stack.Navigator initialRouteName='Splash' screenOptions={{
-          header: (props) => <TopBar {...props} />
-        }}>
-          <Stack.Screen name="Splash" component={Splash} initialParams={{title: 'Splash'}} />
-          <Stack.Screen name="Register" component={Register} initialParams={{title: 'Register'}}  />
-          <Stack.Screen name="Login" component={Login} initialParams={{title: 'Login'}}  />
-          <Stack.Screen name="Verify" component={Verify} initialParams={{title: 'Verification'}}  />
-          <Stack.Screen name="Forgot" component={Forgot} initialParams={{title: 'Password Reset'}}  />
-        </Stack.Navigator>
-      ):(
-        <Stack.Navigator initialRouteName='Home'>
-          <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
-        </Stack.Navigator>
-      )}
-      
+      <Stack.Navigator>
+        {true == true ? ( 
+          <Stack.Group initialRouteName='Splash' screenOptions={{
+            header: (props) => <TopBar {...props} />
+          }}>
+            <Stack.Screen name="Splash" component={Splash} initialParams={{title: 'Splash'}} />
+            <Stack.Screen name="Register" component={Register} initialParams={{title: 'Register'}}  />
+            <Stack.Screen name="Login" component={Login} initialParams={{title: 'Login'}}  />
+            <Stack.Screen name="Verify" component={Verify} initialParams={{title: 'Verification'}}  />
+            <Stack.Screen name="Forgot" component={Forgot} initialParams={{title: 'Password Reset'}}  />
+          </Stack.Group>
+        ):(
+          <Stack.Group initialRouteName='Home' screenOptions={{
+            header: (props) => <TopBar {...props} />
+          }}>
+            <Stack.Screen name="Home" component={Home} initialParams={{title: 'Home'}}/>
+          </Stack.Group>
+        )}
+        <Stack.Group initialRouteName='Home' screenOptions={{
+            header: (props) => <TopBar {...props} />
+          }}>
+            <Stack.Screen name="Home" component={Home} initialParams={{title: 'Home'}}/>
+          </Stack.Group>
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
+
 
 export default App;

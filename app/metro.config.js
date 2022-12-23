@@ -13,8 +13,5 @@ module.exports = {
         inlineRequires: true,
       },
     }),
-  },
-  server: {
-    port: 7071
   }
 };

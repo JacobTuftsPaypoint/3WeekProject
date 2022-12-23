@@ -40,66 +40,59 @@ const Register = () =>{
     //To control whether we can move on to the next page
     const [canNavigate, setCanNavigate] = useState(false)
 
-    function ValidateForm(Username, Email1, Email2, Password1, Password2) {
+    async function ValidateForm(Username, Email1, Email2, Password1, Password2) {
 
         if(Username.length === 0 ) {
             setNameErr(true)
             setNameErrMsg('Please enter your name')
-        } else {
-            setNameErr(false)
-        }
+            console.log(4)
+        } 
 
         if(Email1.length === 0) {
             setEmailErr(true)
             setEmailErrMsg('Enter Email')
-            console.log(1)
-        } else {   
-            setEmailErr(false)
-        }
+            console.log(5)
+        } 
 
         if(!Email1.includes("@")) {
             setEmailErr(true)
             setEmailErrMsg('Enter Valid Email')
-            console.log(1)   
-        } else {  
-            setEmailErr(false)
-        }
+            console.log(6)   
+        } 
 
         if(Email2.length === 0) {
             setEmailErr2(true)
             setEmailErrMsg2('Enter Email')
-            console.log(1) 
-        } else {  
-            setEmailErr2(false)
-        }
+            console.log(7) 
+        } 
 
         if(Password1.length < 6) {
             setPasswordErr(true)
             setPasswordErrMsg('Your Password should be at least 6 characters') 
-        } else {
-            
-        }
+            console.log(3)
+        } 
 
         if(Password2.length < 6) {
             setPasswordErr2(true)
             setPasswordErrMsg2('Your Password should be at least 6 characters')  
-        } else {
-            
-        }
+            console.log(2)
+        } 
 
         if(Password2 !== Password1) {
             setPasswordErr2(true)
             setPasswordErrMsg2('Password should match')  
-        } else {
-            
+            console.log(1)
         }
 
         if ((Username.length === 0) || (Email1.length === 0) || (Email2.length === 0) || (Password1.length === 0) || (Password2.length === 0)) {
             return false
+        } 
+
+        if(nameErr | emailErr | emailErr2 | passwordErr | passwordErr2) {
+            return false
         } else {
             return true
         }
-
     }
 
     return(
@@ -185,11 +178,13 @@ const Register = () =>{
 
             </View>
             <View>
-                <ButtonWithNav text='submit' icon='check' canNavigate={canNavigate} route='Splash' textMsg='submit'  onPressIn={() => {
-
-                    {ValidateForm(name, email, email2, password, password2) ? setCanNavigate(true) : setCanNavigate(false)}
-
-                }} />
+                <ButtonWithNav text='submit' icon='check' canNavigate={canNavigate} route='Splash' textMsg='submit'  onPressIn={ async () => {
+                    {await ValidateForm(name, email, email2, password, password2)}
+                }} 
+                onPressOut={async () => {
+                    {await ValidateForm(name, email, email2, password, password2) ? setCanNavigate(true) : setCanNavigate(false)}
+                }}
+                />
             </View>
         </ScrollView>
     )

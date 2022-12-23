@@ -1,5 +1,4 @@
-
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import { View, TextInput as ReactTextInput, StyleSheet} from 'react-native';
 import { HelperText, Text, TextInput } from 'react-native-paper';
 import ButtonWithNav from '../../components/Buttons/ButtonWithNav';
@@ -32,15 +31,12 @@ const Verify = () =>{
     }
 
     const HandleInput = (text) => {
-        if(text.match(/[^0-9.]+/g)) {
+        if((text.match(/[^0-9.]+/g))) {
             setErrorText('Error: Numbers Only')
             setInputErr(true)
-        }
-        let tempVal = text.replace(/[^0-9.]+/g, '')
-        setValue(tempVal)
-        console.log(value1)
+        } 
+        setValue(text.replace(/[^0-9.]+/g, ''))
     }
-
 
     return(
     <View>
@@ -53,15 +49,17 @@ const Verify = () =>{
                 mode='outlined' 
                 value={value1}
                 error={verificationErr} 
-                onChangeText={(input) => {
+                onChange={(input) => {
                     setVerificationErr(false)
                     setInputErr(false)
-                    HandleInput(input)
+                    HandleInput(input.nativeEvent.text)
                 }}
+
             />
             <HelperText type='error' visible={inputErr} >{errorText}</HelperText>
 
         </View>
+
 
         <View>
             <ButtonWithNav text='Submit' icon='check' testMsg='Submit Code' onPressIn={() => {

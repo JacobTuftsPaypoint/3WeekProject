@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     buttonBox: {
-        flexGrow: 1
+        flexBasis: '50%'
     }
 })
 
